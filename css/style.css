@@ -1,0 +1,134 @@
+/* Custom Variables for Theme Management */
+:root {
+    --primary-purple: #8b5cf6;
+    --sidebar-bg: #0f172a;
+    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --transition-speed: 0.3s;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* --- Dark Mode Implementation (Requirement 4.9) --- */
+html.dark body {
+    background-color: #0f172a; /* Deep navy for high-end look */
+    color: #f1f5f9;
+}
+
+/* Force white backgrounds to go dark slate */
+html.dark .bg-white {
+    background-color: #1e293b !important; 
+    color: #f1f5f9 !important;
+    border-color: #334155 !important;
+}
+
+/* Fix for invisible text in Dark Mode */
+html.dark .text-gray-800, 
+html.dark .text-gray-700, 
+html.dark .text-gray-600,
+html.dark .text-slate-900,
+html.dark label {
+    color: #cbd5e0 !important; /* Light gray text for readability */
+}
+
+/* Table Specifics for Dark Mode */
+html.dark thead {
+    background-color: #0f172a !important;
+}
+
+html.dark th {
+    color: #94a3b8 !important;
+}
+
+html.dark td {
+    color: #e2e8f0 !important;
+    border-color: #334155 !important;
+}
+
+/* Input Fields in Dark Mode */
+html.dark input, 
+html.dark select {
+    background-color: #0f172a !important;
+    color: white !important;
+    border-color: #475569 !important;
+}
+
+/* Sidebar Styling (Global Feature) */
+aside nav a {
+    transition: all var(--transition-speed);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+aside nav a:hover {
+    transform: translateX(5px);
+    background-color: rgba(139, 92, 246, 0.1);
+}
+
+/* Card Hover Effects (Requirement 4.4) */
+.stat-card {
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Custom Table Styles (Requirement 4.5 & 4.6) */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: #64748b;
+}
+
+/* Animation for Notifications (Requirement 4.8) */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.notification-item {
+    animation: slideIn 0.4s ease-out;
+}
+
+/* Responsive Utilities (Requirement 2.5) */
+@media (max-width: 768px) {
+    .sidebar-collapsed {
+        width: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+}
+
+/* Custom Scrollbar for a "Premium" Look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+html.dark ::-webkit-scrollbar-track {
+    background: #2d3748;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-purple);
+}

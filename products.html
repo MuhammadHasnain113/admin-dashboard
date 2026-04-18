@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management | Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/auth.js"></script>
+    <script>AuthService.checkAuth();</script>
+</head>
+<body class="bg-gray-100 flex min-h-screen">
+
+    <aside class="w-64 bg-slate-900 text-white p-6 hidden md:block shrink-0">
+        <div class="text-2xl font-bold mb-10 text-purple-400">ADMIN PRO</div>
+        <nav class="space-y-4">
+            <a href="dashboard.html" class="block p-3 hover:bg-slate-800 rounded">Dashboard</a>
+            <a href="users.html" class="block p-3 hover:bg-slate-800 rounded">Users</a>
+            <a href="products.html" class="block p-3 bg-purple-600 rounded shadow-lg">Products</a>
+            <a href="analytics.html" class="block p-3 hover:bg-slate-800 rounded">Analytics</a>
+            <a href="notifications.html" class="block p-3 hover:bg-slate-800 rounded">Notifications</a>
+            <a href="settings.html" class="block p-3 hover:bg-slate-800 rounded">Settings</a>
+            <button onclick="AuthService.logout()" class="block p-3 text-red-400 w-full text-left mt-10 border-t border-slate-700">Logout</button>
+        </nav>
+    </aside>
+
+   <main class="flex-1 p-8">
+    <div class="bg-[#8b5cf6] p-5 rounded-t-xl flex justify-between items-center shadow-lg">
+        <h1 class="text-2xl font-bold text-white tracking-wide">Product Inventory</h1>
+        <button onclick="openProductModal()" class="bg-white text-[#8b5cf6] px-6 py-2 rounded-lg shadow-md hover:bg-gray-100 transition font-bold">
+            + Add Product
+        </button>
+    </div>
+
+    <div class="bg-white p-4 border-x border-gray-100 flex gap-4">
+        <input type="text" id="prodSearch" placeholder="Filter products..." class="flex-1 p-2 border rounded-lg outline-none focus:ring-2 focus:ring-purple-400">
+        <select id="prodSort" class="p-2 border rounded-lg outline-none bg-gray-50">
+            <option value="default">Sort By</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="qty-low">Stock: Low to High</option>
+        </select>
+    </div>
+
+    <div class="bg-white rounded-b-xl shadow-xl overflow-hidden border border-gray-200">
+        <table class="w-full text-left">
+            <thead class="bg-gray-50 border-b">
+                <tr class="text-gray-400 text-xs uppercase tracking-widest">
+                    <th class="p-4">Picture</th>
+                    <th class="p-4">Name</th>
+                    <th class="p-4">Price</th>
+                    <th class="p-4">Quantity</th>
+                    <th class="p-4">Status</th>
+                    <th class="p-4 text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+                </tbody>
+        </table>
+    </div>
+</main>
+    <div id="productModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+            <h2 id="modalTitle" class="text-2xl font-bold mb-6">Add Product</h2>
+            <form id="productForm" class="space-y-4">
+                <input type="hidden" id="prodId">
+                <input type="text" id="pName" placeholder="Product Name" required class="w-full p-3 border rounded-lg">
+                <input type="number" id="pPrice" placeholder="Price" required class="w-full p-3 border rounded-lg">
+                <input type="number" id="pQty" placeholder="Quantity" required class="w-full p-3 border rounded-lg">
+                <input type="text" id="pImg" placeholder="Image URL (e.g. https://via.placeholder.com/50)" class="w-full p-3 border rounded-lg">
+                <select id="pStatus" class="w-full p-3 border rounded-lg">
+                    <option value="In Stock">In Stock</option>
+                    <option value="Low Stock">Low Stock</option>
+                    <option value="Out of Stock">Out of Stock</option>
+                </select>
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeProductModal()" class="text-gray-500">Cancel</button>
+                    <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/product.js"></script>
+</body>
+</html>

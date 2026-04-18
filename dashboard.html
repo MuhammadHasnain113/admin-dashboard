@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/auth.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>AuthService.checkAuth();</script>
+</head>
+<body class="bg-gray-100 flex min-h-screen">
+    <aside class="w-64 bg-slate-900 text-white p-6 hidden md:block">
+        <div class="text-2xl font-bold mb-10 text-purple-400">ADMIN PRO</div>
+        <nav class="space-y-4">
+            <a href="dashboard.html" class="block p-3 bg-purple-600 rounded">Dashboard</a>
+            <a href="users.html" class="block p-3 hover:bg-slate-800 rounded">Users</a>
+            <a href="products.html" class="block p-3 hover:bg-slate-800 rounded">Products</a>
+            <a href="analytics.html" class="block p-3 hover:bg-slate-800 rounded">Analytics</a>
+            <a href="notifications.html" class="block p-3 hover:bg-slate-800 rounded">Notifications</a>
+            <a href="settings.html" class="block p-3 hover:bg-slate-800 rounded text-gray-400">Settings</a>
+            <button onclick="AuthService.logout()" class="block p-3 text-red-400 w-full text-left">Logout</button>
+        </nav>
+    </aside>
+
+    <main class="flex-1 p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold">Performance Overview</h1>
+            <div class="flex items-center gap-4">
+                <span id="userLabel" class="font-medium text-gray-700"></span>
+                <img src="https://ui-avatars.com/api/?name=Admin" class="w-10 h-10 rounded-full border-2 border-purple-500">
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                <h3 class="text-gray-400 text-sm uppercase">Total Users</h3>
+                <p class="text-2xl font-bold" id="totalUsersCount">1,240</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+                <h3 class="text-gray-400 text-sm uppercase">Revenue</h3>
+                <p class="text-2xl font-bold">$12,843</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-orange-500">
+                <h3 class="text-gray-400 text-sm uppercase">Orders</h3>
+                <p class="text-2xl font-bold">452</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow">
+                <h3 class="font-bold mb-4">Sales Progress</h3>
+                <canvas id="salesChart"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow">
+                <h3 class="font-bold mb-4">User Roles Distribution</h3>
+                <canvas id="rolesChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('userLabel').innerText = AuthService.getCurrentUser().email;
+
+        // Sales Line Chart
+        new Chart(document.getElementById('salesChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{ label: 'Sales $', data: [5000, 7000, 4500, 9000, 12000], borderColor: '#8b5cf6', tension: 0.3 }]
+            }
+        });
+
+        // Roles Pie Chart
+        new Chart(document.getElementById('rolesChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Admin', 'Editor', 'Viewer'],
+                datasets: [{ data: [10, 25, 65], backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'] }]
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account | Admin Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#0f172a] flex items-center justify-center min-h-screen p-4">
+    <div class="absolute top-0 left-0 w-64 h-64 bg-[#8b5cf6] opacity-20 blur-[100px] rounded-full"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-600 opacity-10 blur-[120px] rounded-full"></div>
+
+    <div class="relative bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-3xl shadow-2xl w-full max-w-lg">
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-extrabold text-white mb-2 tracking-tight">ADMIN <span class="text-[#8b5cf6]">PRO</span></h2>
+            <p class="text-gray-400">Join the next generation of business management</p>
+        </div>
+
+        <form id="signupForm" class="space-y-6">
+            <div>
+                <label class="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
+                <input type="email" id="email" required placeholder="name@company.com" 
+                    class="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-[#8b5cf6] focus:border-transparent outline-none transition-all">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">Password</label>
+                    <input type="password" id="pass" required placeholder="••••••••" 
+                        class="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-[#8b5cf6] outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">Confirm</label>
+                    <input type="password" id="confirm" required placeholder="••••••••" 
+                        class="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-[#8b5cf6] outline-none transition-all">
+                </div>
+            </div>
+            
+            <button type="submit" class="w-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-white p-4 rounded-xl font-bold shadow-lg shadow-purple-500/20 transform active:scale-95 transition-all">
+                Create Free Account
+            </button>
+        </form>
+
+        <p class="mt-8 text-center text-sm text-gray-400">
+            Already a member? <a href="login.html" class="text-[#8b5cf6] font-bold hover:underline ml-1">Log in here</a>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').onsubmit = (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('pass').value;
+            const confirm = document.getElementById('confirm').value;
+
+            if (pass !== confirm) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+            users.push({ email, password: pass });
+            localStorage.setItem('registeredUsers', JSON.stringify(users));
+            
+            window.location.href = 'login.html';
+        };
+    </script>
+</body>
+</html>

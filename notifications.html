@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications | Admin Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/auth.js"></script>
+    <script>AuthService.checkAuth();</script>
+</head>
+<body class="bg-gray-100 flex min-h-screen">
+
+    <aside class="w-64 bg-slate-900 text-white p-6 hidden md:block shrink-0">
+        <div class="text-2xl font-bold mb-10 text-purple-400">ADMIN PRO</div>
+        <nav class="space-y-4">
+            <a href="dashboard.html" class="block p-3 hover:bg-slate-800 rounded">Dashboard</a>
+            <a href="users.html" class="block p-3 hover:bg-slate-800 rounded">Users</a>
+            <a href="products.html" class="block p-3 hover:bg-slate-800 rounded">Products</a>
+             <a href="analytics.html" class="block p-3 hover:bg-slate-800 rounded">Analytics</a>
+            <a href="notifications.html" class="block p-3 bg-[#8b5cf6] rounded-lg shadow-lg font-bold">Notifications</a>
+            <a href="settings.html" class="block p-3 hover:bg-slate-800 rounded">Settings</a>
+            <button onclick="AuthService.logout()" class="block p-3 text-red-400 w-full text-left mt-10 border-t border-slate-700">Logout</button>
+        </nav>
+    </aside>
+
+    <main class="flex-1 p-8">
+        <div class="bg-[#8b5cf6] p-5 rounded-t-xl flex justify-between items-center shadow-lg">
+            <h1 class="text-2xl font-bold text-white tracking-wide">Notifications</h1>
+            <button onclick="markAllAsRead()" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg backdrop-blur-md transition text-sm">
+                Mark All as Read
+            </button>
+        </div>
+
+        <div class="bg-white rounded-b-xl shadow-xl overflow-hidden border border-gray-100">
+            <div id="notificationList" class="divide-y divide-gray-100">
+                </div>
+            <div id="emptyState" class="hidden p-20 text-center text-gray-400">
+                <p class="text-lg">No new notifications</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>
